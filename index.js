@@ -70,7 +70,7 @@ async function run() {
             let query = {}
             if (req.query.email && req.query.email === req.decoded.email) {
                 query = { email: req.query.email }
-                const result = await notesCollection.find(query).toArray()
+                const result = await notesCollection.find(query).sort({update: -1}).toArray()
                 return res.send(result)
             }
             return res.status(401).send({ error: true, message: 'Authorization field' })
